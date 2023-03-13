@@ -3,8 +3,8 @@ package executavel;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.dao.telefone.TelefoneDAO;
 import model.dao.telefonia.EnderecoDAO;
+import model.dao.telefonia.TelefoneDAO;
 import model.vo.telefonia.Cliente;
 import model.vo.telefonia.Endereco;
 import model.vo.telefonia.Telefone;
