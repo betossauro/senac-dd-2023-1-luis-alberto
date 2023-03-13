@@ -15,6 +15,7 @@ public class ExecutavelTelefonia {
 
 //		Endereco endereco1 = new Endereco(null, "88000123", "Mauro Ramos", "50", "Centro", "Florianópolis", "SC");
 		Telefone telefone1 = new Telefone(null, null, "48", "998577999", false, true);
+		Telefone telefone2 = new Telefone(null, 2, "48", "998577999", false, true);
 		
 		
 //		EnderecoDAO salvadorDeEnderecos = new EnderecoDAO();
@@ -27,9 +28,9 @@ public class ExecutavelTelefonia {
 //		}
 		
 		TelefoneDAO salvadorDeTelefones = new TelefoneDAO();
-		salvadorDeTelefones.inserir(telefone1);
+		salvadorDeTelefones.inserir(telefone2);
 		
-		if (telefone1.getId() != null) {
+		if (telefone2.getId() != null) {
 			System.out.println("Novo telefone cadastrado!");
 		} else {
 			System.out.println("Erro ao cadastrar telefone!");
