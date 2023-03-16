@@ -48,7 +48,7 @@ public class EnderecoDAO {
 		return novoEndereco;
 	}
 
-	// Update endereco
+	// UPDATE endereco
 	public boolean atualizar(Endereco enderecoEditado) {
 		boolean atualizou = false;
 		Connection conexao = Banco.getConnection();
@@ -56,7 +56,6 @@ public class EnderecoDAO {
 				+ "	WHERE ID = ? ";
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
 
-		// Executar o UPDATE
 		try {
 			query.setString(1, enderecoEditado.getCep());
 			query.setString(2, enderecoEditado.getRua());
@@ -77,6 +76,7 @@ public class EnderecoDAO {
 		return atualizou;
 	}
 
+	// Executar Consulta por ID
 	public Endereco consultarPorId(int id) {
 		Endereco enderecoConsultado = null;
 		Connection conexao = Banco.getConnection();
@@ -103,13 +103,13 @@ public class EnderecoDAO {
 		return enderecoConsultado;
 	}
 
+	// Executar DELETE
 	public boolean excluir(int id) {
 		boolean excluiu = false;
 		Connection conexao = Banco.getConnection();
 		String sql = " DELETE FROM ENDERECO " + "	WHERE ID = ? ";
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
 
-		// Executar o UPDATE
 		try {
 			query.setInt(1, id);
 
