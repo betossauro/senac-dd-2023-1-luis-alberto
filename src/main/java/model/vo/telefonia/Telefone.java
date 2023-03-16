@@ -73,7 +73,7 @@ public class Telefone {
 
 	@Override
 	public String toString() {
-		return "\nID: " + this.getId() + "\nID Cliente" + this.getIdCliente() + "\nDDD: " + this.getDdd() + "\nNúmero: "
+		return "\nID: " + this.getId() + "\nID Cliente: " + this.getIdCliente() + "\nDDD: " + this.getDdd() + "\nNúmero: "
 				+ this.getNumero() + "\nAtivo: " + this.isAtivo() + "\nMóvel: " + this.isMovel();
 	}
 
