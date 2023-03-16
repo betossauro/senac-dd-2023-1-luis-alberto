@@ -32,7 +32,6 @@ public class EnderecoDAO {
 			query.setString(5, novoEndereco.getCidade());
 			query.setString(6, novoEndereco.getEstado());
 			query.execute();
-
 			// Preencher o ID gerado no banco no objeto
 			ResultSet resultado = query.getGeneratedKeys();
 			if (resultado.next()) {
@@ -55,7 +54,6 @@ public class EnderecoDAO {
 		String sql = " UPDATE ENDERECO " + " SET CEP = ?, RUA = ?, NUMERO = ?, BAIRRO = ?, CIDADE = ?, ESTADO = ? "
 				+ "	WHERE ID = ? ";
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
-
 		try {
 			query.setString(1, enderecoEditado.getCep());
 			query.setString(2, enderecoEditado.getRua());
@@ -82,7 +80,6 @@ public class EnderecoDAO {
 		Connection conexao = Banco.getConnection();
 		String sql = " SELECT * FROM ENDERECO " + "	WHERE ID = ? ";
 		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
-
 		try {
 			query.setInt(1, id);
 			ResultSet resultado = query.executeQuery();
@@ -99,7 +96,6 @@ public class EnderecoDAO {
 		} catch (SQLException erro) {
 			System.out.println("Erro ao buscar endereço com id: " + id + "\nCausa: " + erro.getMessage());
 		}
-
 		return enderecoConsultado;
 	}
 
@@ -112,7 +108,6 @@ public class EnderecoDAO {
 
 		try {
 			query.setInt(1, id);
-
 			int qtdeLinhasAtualizadas = query.executeUpdate();
 			excluiu = qtdeLinhasAtualizadas > 0;
 		} catch (SQLException erro) {
