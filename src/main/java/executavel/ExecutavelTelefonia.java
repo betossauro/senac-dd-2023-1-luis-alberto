@@ -14,12 +14,18 @@ public class ExecutavelTelefonia {
 	public static void main(String[] args) {
 
 //		Endereco endereco1 = new Endereco(null, "88000123", "Mauro Ramos", "50", "Centro", "Florianópolis", "SC");
-		Telefone telefone1 = new Telefone(null, null, "48", "998577999", false, true);
-		Telefone telefone2 = new Telefone(null, 2, "48", "998577999", false, true);
-		
-		
+//		Telefone telefone1 = new Telefone(null, null, "48", "998577999", false, true);
+//		Telefone telefone2 = new Telefone(null, 2, "48", "998577999", false, true);
+//		
+//		// SIMULANDO ENDERECO
 //		EnderecoDAO salvadorDeEnderecos = new EnderecoDAO();
 //		salvadorDeEnderecos.inserir(endereco1);
+//		
+//		if (salvadorDeEnderecos.excluir(4)) {
+//			System.out.println("Endereço foi excluido!");
+//		} else {
+//			System.out.println("Erro ao excluir endereço!");
+//		}
 //		
 //		if (endereco1.getId() != null) {
 //			System.out.println("Novo endereço cadastrado!");
@@ -27,14 +33,36 @@ public class ExecutavelTelefonia {
 //			System.out.println("Erro ao cadastrar endereço!");
 //		}
 		
-		TelefoneDAO salvadorDeTelefones = new TelefoneDAO();
-		salvadorDeTelefones.inserir(telefone2);
+//		Endereco enderecoExistente = salvadorDeEnderecos.consultarPorId(3);
+//		enderecoExistente.setRua("Rua sem fim");
+//		boolean atualizou = salvadorDeEnderecos.atualizar(enderecoExistente);
+//		
+//		if (atualizou) {
+//			System.out.println("Endereço foi atualizado!");
+//		} else {
+//			System.out.println("Erro ao atualizar endereço!");
+//		}
 		
-		if (telefone2.getId() != null) {
-			System.out.println("Novo telefone cadastrado!");
-		} else {
-			System.out.println("Erro ao cadastrar telefone!");
-		}
+		// SIMULANDO TELEFONE
+		
+//		TelefoneDAO salvadorDeTelefones = new TelefoneDAO();
+//		Telefone telefoneExistente = salvadorDeTelefones.consultarPorId(2);
+//		System.out.println(telefoneExistente);
+//		telefoneExistente.setIdCliente(1);
+//		boolean atualizou = salvadorDeTelefones.atualizar(telefoneExistente);
+		
+//		if (salvadorDeTelefones.excluir(3)) {
+//			System.out.println("Telefone foi excluido!");
+//		} else {
+//			System.out.println("Erro ao excluir telefone!");
+//		}
+//		salvadorDeTelefones.inserir(telefone2);
+//		
+//		if (telefone2.getId() != null) {
+//			System.out.println("Novo telefone cadastrado!");
+//		} else {
+//			System.out.println("Erro ao cadastrar telefone!");
+//		}
 
 //		List<Telefone> telefonesDoSocrates = new ArrayList<Telefone>();
 //		Telefone telefone1 = new Telefone(null, null, "48", "32328888", true, false);
