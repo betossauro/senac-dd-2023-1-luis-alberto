@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.dao.Banco;
 import model.vo.telefonia.Endereco;
@@ -74,31 +76,6 @@ public class EnderecoDAO {
 		return atualizou;
 	}
 
-	// Executar Consulta por ID
-	public Endereco consultarPorId(int id) {
-		Endereco enderecoConsultado = null;
-		Connection conexao = Banco.getConnection();
-		String sql = " SELECT * FROM ENDERECO " + "	WHERE ID = ? ";
-		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
-		try {
-			query.setInt(1, id);
-			ResultSet resultado = query.executeQuery();
-			if (resultado.next()) {
-				enderecoConsultado = new Endereco();
-				enderecoConsultado.setId(resultado.getInt("id"));
-				enderecoConsultado.setCep(resultado.getString("cep"));
-				enderecoConsultado.setRua(resultado.getString("rua"));
-				enderecoConsultado.setNumero(resultado.getString("numero"));
-				enderecoConsultado.setBairro(resultado.getString("bairro"));
-				enderecoConsultado.setCidade(resultado.getString("cidade"));
-				enderecoConsultado.setEstado(resultado.getString("estado"));
-			}
-		} catch (SQLException erro) {
-			System.out.println("Erro ao buscar endereço com id: " + id + "\nCausa: " + erro.getMessage());
-		}
-		return enderecoConsultado;
-	}
-
 	// Executar DELETE
 	public boolean excluir(int id) {
 		boolean excluiu = false;
@@ -117,5 +94,60 @@ public class EnderecoDAO {
 			Banco.closeConnection(conexao);
 		}
 		return excluiu;
+	}
+
+	// Executar Consulta por ID
+	public Endereco consultarPorId(int id) {
+		Endereco enderecoConsultado = null;
+		Connection conexao = Banco.getConnection();
+		String sql = " SELECT * FROM ENDERECO " + "	WHERE ID = ? ";
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		try {
+			query.setInt(1, id);
+			ResultSet resultado = query.executeQuery();
+			if (resultado.next()) {
+				enderecoConsultado = converterResultSetParaEntidade(resultado);
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao buscar endereço com id: " + id + "\nCausa: " + erro.getMessage());
+		} finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		return enderecoConsultado;
+	}
+
+	// Executar Consultar Todos
+	public List<Endereco> consultarTodos() {
+		Connection conexao = Banco.getConnection();
+		List<Endereco> enderecos = new ArrayList<Endereco>();
+		String sql = " SELECT * FROM ENDERECO ";
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		try {
+			ResultSet resultado = query.executeQuery();
+			while (resultado.next()) {
+				Endereco enderecoConsultado = converterResultSetParaEntidade(resultado);
+				enderecos.add(enderecoConsultado);
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao buscar todos os endereços." + "\nCausa: " + erro.getMessage());
+		} finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		return enderecos;
+	}
+
+	// Método para deixar o código clean e evitar repetição
+	private Endereco converterResultSetParaEntidade(ResultSet resultado) throws SQLException {
+		Endereco enderecoConsultado = new Endereco();
+		enderecoConsultado.setId(resultado.getInt("id"));
+		enderecoConsultado.setCep(resultado.getString("cep"));
+		enderecoConsultado.setRua(resultado.getString("rua"));
+		enderecoConsultado.setNumero(resultado.getString("numero"));
+		enderecoConsultado.setBairro(resultado.getString("bairro"));
+		enderecoConsultado.setCidade(resultado.getString("cidade"));
+		enderecoConsultado.setEstado(resultado.getString("estado"));
+		return enderecoConsultado;
 	}
 }
