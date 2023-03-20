@@ -145,4 +145,26 @@ public class TelefoneDAO {
 		telefoneConsultado.setIdCliente(resultado.getInt("id_cliente"));
 		return telefoneConsultado;
 	}
+
+	// Método para consultar todos os telefones para determinado ID
+	public List<Telefone> consultarPorIdCliente(Integer id) {
+		List<Telefone> telefones = new ArrayList<Telefone>();
+		Connection conexao = Banco.getConnection();
+		String sql = " SELECT * FROM TELEFONE " + "	WHERE ID_CLIENTE = ? ";
+		PreparedStatement query = Banco.getPreparedStatement(conexao, sql);
+		try {
+			query.setInt(1, id);
+			ResultSet resultado = query.executeQuery();
+			while (resultado.next()) {
+				Telefone telefoneConsultado = converterResultSetParaEntidade(resultado);
+				telefones.add(telefoneConsultado);
+			}
+		} catch (SQLException erro) {
+			System.out.println("Erro ao buscar todos os telefones do cliente informado. " + "\nCausa: " + erro.getMessage());
+		} finally {
+			Banco.closePreparedStatement(query);
+			Banco.closeConnection(conexao);
+		}
+		return telefones;
+	}
 }
