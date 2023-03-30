@@ -3,10 +3,12 @@
   <groupId>SENAC-DD-2023-1-LUIS-ALBERTO</groupId>
   <artifactId>SENAC-DD-2023-1-LUIS-ALBERTO</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
-  <properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
 	
   <dependencies>
 		<dependency>
