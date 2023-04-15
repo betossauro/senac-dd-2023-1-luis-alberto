@@ -82,10 +82,14 @@ public class Endereco {
 	}
 
 	@Override
+//	public String toString() {
+//		return "\nID: " + this.getId() + "\nCEP: " + this.getCep() + "\nRua: " + this.getRua() + "\nNúmero: "
+//				+ this.getNumero() + "\nBairro: " + this.getBairro() + "\nEstado: " + this.getEstado() + "\nCidade: "
+//				+ this.getCidade();
+//	}
+	
 	public String toString() {
-		return "\nID: " + this.getId() + "\nCEP: " + this.getCep() + "\nRua: " + this.getRua() + "\nNúmero: "
-				+ this.getNumero() + "\nBairro: " + this.getBairro() + "\nEstado: " + this.getEstado() + "\nCidade: "
-				+ this.getCidade();
+		return "Rua: " + this.getRua() + ", número: " + this.getNumero();
 	}
 
 }
