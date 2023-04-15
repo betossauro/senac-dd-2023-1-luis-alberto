@@ -131,7 +131,11 @@ public class TelaCadastroTelefone {
 				} else {
 					novoTelefone.setMovel(false);
 				}
-				
+				if (!cbCliente.getSelectedItem().equals(null)) {
+					novoTelefone.setAtivo(true);
+				} else {
+					novoTelefone.setAtivo(false);
+				}
 				TelefoneController controller = new TelefoneController();
 				try {
 					controller.inserir(novoTelefone);
