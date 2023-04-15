@@ -184,7 +184,7 @@ public class TelefoneDAO {
 	// Método para desativar telefone de um cliente
 	public void desativarTelefones(int id) {
 		Connection conn = Banco.getConnection();
-		String sql = " UPDATE EXEMPLOS.TELEFONE "
+		String sql = " UPDATE TELEFONIA "
 				+ " SET ID_CLIENTE=NULL, ativo=0 "
 				+ " WHERE ID_CLIENTE=? ";
 
