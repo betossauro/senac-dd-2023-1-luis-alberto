@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.dao.Banco;
-import model.vo.telefonia.Endereco;
 import model.vo.telefonia.Telefone;
 
 public class TelefoneDAO {
@@ -133,8 +132,7 @@ public class TelefoneDAO {
 		}
 		return telefones;
 	}
-	
-	
+
 	private Telefone converterResultSetParaEntidade(ResultSet resultado) throws SQLException {
 		Telefone telefoneConsultado = new Telefone();
 		telefoneConsultado.setId(resultado.getInt("id"));
@@ -166,5 +164,38 @@ public class TelefoneDAO {
 			Banco.closeConnection(conexao);
 		}
 		return telefones;
+	}
+
+	// Método para ativar telefone de um cliente
+	public void ativarTelefones(Integer idDono, List<Telefone> telefones) {
+		for (Telefone telefoneDoCliente : telefones) {
+			telefoneDoCliente.setIdCliente(idDono);
+			telefoneDoCliente.setAtivo(true);
+			if (telefoneDoCliente.getId() > 0) {
+				// UPDATE no Telefone
+				this.atualizar(telefoneDoCliente);
+			} else {
+				// INSERT no Telefone
+				this.inserir(telefoneDoCliente);
+			}
+		}
+	}
+
+	// Método para desativar telefone de um cliente
+	public void desativarTelefones(int id) {
+		Connection conn = Banco.getConnection();
+		String sql = " UPDATE EXEMPLOS.TELEFONE "
+				+ " SET ID_CLIENTE=NULL, ativo=0 "
+				+ " WHERE ID_CLIENTE=? ";
+
+		PreparedStatement stmt = Banco.getPreparedStatement(conn, sql);
+
+		try {
+			stmt.setInt(1, id);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("Erro ao desativar telefone.");
+			System.out.println("Erro: " + e.getMessage());
+		}
 	}
 }
