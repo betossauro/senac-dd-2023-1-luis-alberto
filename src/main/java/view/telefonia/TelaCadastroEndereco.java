@@ -6,14 +6,17 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.text.MaskFormatter;
 
 import controller.telefonia.EnderecoController;
 import model.exception.CampoInvalidoException;
 import model.vo.telefonia.Endereco;
 
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.awt.event.ActionEvent;
 
 public class TelaCadastroEndereco {
@@ -35,6 +38,7 @@ public class TelaCadastroEndereco {
 
 	// TODO chamar API ou backend futuramente
 	private String[] estados = { "Paraná", "Rio Grande do Sul", "Santa Catarina" };
+	private MaskFormatter mascaraCep;
 
 	/**
 	 * Launch the application.
@@ -55,73 +59,76 @@ public class TelaCadastroEndereco {
 	/**
 	 * Create the application.
 	 */
-	public TelaCadastroEndereco() {
+	public TelaCadastroEndereco() throws ParseException{
 		initialize();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize() throws ParseException{
 		frmCadastroDeEndereco = new JFrame();
 		frmCadastroDeEndereco.setTitle("Cadastro de Endereço");
-		frmCadastroDeEndereco.setBounds(100, 100, 400, 250);
+		frmCadastroDeEndereco.setBounds(100, 100, 375, 250);
 		frmCadastroDeEndereco.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCadastroDeEndereco.getContentPane().setLayout(null);
 
 		lblCep = new JLabel("CEP:");
-		lblCep.setBounds(15, 15, 45, 14);
+		lblCep.setBounds(15, 15, 60, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblCep);
 
-		txtCep = new JTextField();
-		txtCep.setBounds(60, 12, 300, 20);
+		mascaraCep = new MaskFormatter("#####-###");
+		mascaraCep.setValueContainsLiteralCharacters(false);
+
+		txtCep = new JFormattedTextField(mascaraCep);
+		txtCep.setBounds(60, 10, 275, 20);
 		frmCadastroDeEndereco.getContentPane().add(txtCep);
 		txtCep.setColumns(10);
 
 		lblRua = new JLabel("Rua:");
-		lblRua.setBounds(15, 40, 45, 14);
+		lblRua.setBounds(15, 40, 60, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblRua);
 
 		lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(15, 65, 45, 14);
+		lblBairro.setBounds(15, 65, 60, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblBairro);
 
 		lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(15, 90, 45, 14);
+		lblCidade.setBounds(15, 90, 60, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblCidade);
 
 		lblNumero = new JLabel("Número:");
-		lblNumero.setBounds(15, 115, 45, 14);
+		lblNumero.setBounds(15, 115, 60, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblNumero);
 
 		lblEstado = new JLabel("Estado:");
-		lblEstado.setBounds(15, 140, 45, 14);
+		lblEstado.setBounds(15, 140, 60, 14);
 		frmCadastroDeEndereco.getContentPane().add(lblEstado);
 
 		txtRua = new JTextField();
-		txtRua.setBounds(60, 37, 300, 20);
+		txtRua.setBounds(60, 35, 275, 20);
 		frmCadastroDeEndereco.getContentPane().add(txtRua);
 		txtRua.setColumns(10);
 
 		txtBairro = new JTextField();
 		txtBairro.setColumns(10);
-		txtBairro.setBounds(60, 62, 300, 20);
+		txtBairro.setBounds(60, 60, 275, 20);
 		frmCadastroDeEndereco.getContentPane().add(txtBairro);
 
 		txtCidade = new JTextField();
 		txtCidade.setColumns(10);
-		txtCidade.setBounds(60, 87, 300, 20);
+		txtCidade.setBounds(60, 85, 275, 20);
 		frmCadastroDeEndereco.getContentPane().add(txtCidade);
 
 		txtNumero = new JTextField();
 		txtNumero.setColumns(10);
-		txtNumero.setBounds(60, 112, 300, 20);
+		txtNumero.setBounds(60, 110, 275, 20);
 		frmCadastroDeEndereco.getContentPane().add(txtNumero);
 
 		cbEstado = new JComboBox(estados);
 		cbEstado.setToolTipText("Selecione");
 		cbEstado.setSelectedIndex(-1);
-		cbEstado.setBounds(60, 136, 300, 22);
+		cbEstado.setBounds(60, 135, 275, 22);
 		frmCadastroDeEndereco.getContentPane().add(cbEstado);
 
 		btnCadastrar = new JButton("Cadastrar");
