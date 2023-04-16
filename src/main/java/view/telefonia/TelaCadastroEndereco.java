@@ -131,6 +131,7 @@ public class TelaCadastroEndereco {
 				endereco.setCep(txtCep.getText());
 				endereco.setRua(txtRua.getText());
 				endereco.setNumero(txtNumero.getText());
+				endereco.setBairro(txtBairro.getText());
 				endereco.setCidade(txtCidade.getText());
 				endereco.setEstado((String) cbEstado.getSelectedItem());
 
