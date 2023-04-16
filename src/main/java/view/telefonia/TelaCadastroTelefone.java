@@ -101,14 +101,14 @@ public class TelaCadastroTelefone {
 		txtfNumero = new JFormattedTextField(mascaraTelefone);
 		txtfNumero.setBounds(90, 10, 275, 20);
 		frmCadastroDeTelefone.getContentPane().add(txtfNumero);
-		
+
 		lblCliente = new JLabel("Cliente:");
 		lblCliente.setBounds(15, 85, 65, 14);
 		frmCadastroDeTelefone.getContentPane().add(lblCliente);
-		
+
 		ClienteController controller = new ClienteController();
 		clientes = (ArrayList<Cliente>) controller.consultarTodos();
-		
+
 		cbCliente = new JComboBox(clientes.toArray());
 		cbCliente.setToolTipText("Selecione");
 		cbCliente.setSelectedIndex(-1);
@@ -124,14 +124,13 @@ public class TelaCadastroTelefone {
 					novoTelefone.setDdd(telefoneSemMascara.substring(0, 2));
 					novoTelefone.setNumero(telefoneSemMascara.substring(2));
 				} catch (ParseException ex) {
-					JOptionPane.showMessageDialog(null, "Erro ao converter o telefone", "Erro", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Erro ao converter o telefone", "Erro",
+							JOptionPane.ERROR_MESSAGE);
 				}
-				if (rdbtnSim.isSelected()) {
-					novoTelefone.setMovel(true);
-				} else {
-					novoTelefone.setMovel(false);
-				}
-				if (!cbCliente.getSelectedItem().equals(null)) {
+				novoTelefone.setMovel(rdbtnSim.isSelected());
+				Cliente clienteSelecionado = (Cliente) cbCliente.getSelectedItem();
+				if (clienteSelecionado != null) {
+					novoTelefone.setIdCliente(clienteSelecionado.getId());
 					novoTelefone.setAtivo(true);
 				} else {
 					novoTelefone.setAtivo(false);
@@ -140,7 +139,8 @@ public class TelaCadastroTelefone {
 				try {
 					controller.inserir(novoTelefone);
 
-					JOptionPane.showMessageDialog(null, "Telefone cadastrado com sucesso!", "Cadastro com sucesso", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Telefone cadastrado com sucesso!", "Cadastro com sucesso",
+							JOptionPane.INFORMATION_MESSAGE);
 				} catch (CampoInvalidoException ex) {
 					JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 				}
